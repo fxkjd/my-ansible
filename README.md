@@ -12,7 +12,7 @@ Edit the inventory hosts (`hosts.ini`) to target your desired host. You may also
 
 ## First 20 seconds in a server
 
-Basic configuration for a fresh server.
+Basic configuration for a fresh server. Modify `ssh_key` to the local path of the public key you want to install in the server.
 
 Run the `first_setup` playbook
 
