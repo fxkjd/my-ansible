@@ -1,0 +1,6 @@
+- name: First setup of new server
+  # Allows caller to override hosts using '-e cmd_hosts='
+  hosts:
+     - "{{ cmd_hosts | default('servers')}}"
+  roles:
+     - first_setup

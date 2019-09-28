@@ -1,0 +1,39 @@
+---
+- name: First Setup | Update the package list
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+- name: First Setup | Upgrade a server with apt
+  apt:
+    upgrade: dist
+  register: upgrade
+- name: First Setup | Copy ssh id
+  authorized_key:
+    user: root
+    key: "{{ item }}"
+    manage_dir: no
+  with_file:
+    - "{{ ssh_key }}"
+#- name: First Setup | Set ssh port to 2222
+#  lineinfile:
+#    dest: /etc/ssh/sshd_config
+#    line: 'Port 2222'
+#    insertafter: EOF
+#    state: present
+- name: First Setup | Turn off ssh password authentication
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '^PasswordAuthentication yes(.*)$'
+    line: 'PasswordAuthentication no'
+    state: present
+- name: First Setup | Set modern host key
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    line: 'HostKey /etc/ssh/ssh_host_ed25519_key'
+    state: present
+- name: First Setup | Generate missing host keys
+  command: ssh-keygen -A
+- name: First Setup | Restart ssh
+  service:
+    name: ssh
+    state: restarted
