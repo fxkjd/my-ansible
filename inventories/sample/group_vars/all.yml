@@ -1,1 +1,14 @@
-ssh_key: /path/to/id_rsa
+# ---------------------------- First setup config variables ---------------------------- #
+
+# Local path of the public key you want to install in the server.
+ssh_key: /path/to/id_rsa.pub
+
+# User management information
+
+new_user: new_username 
+# Password has to be the its crypted value
+# For more info check: https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module
+new_root_password: password_hash 
+new_user_password: password_hash
+
+# ---------------------------- First setup config variables ---------------------------- #
