@@ -4,8 +4,9 @@
 ssh_key: /path/to/id_rsa.pub
 
 # User management information
-
+# This is the user that is going to be created in the remote server
 new_user: new_username 
+# Password for root and the new user
 # Password has to be the its crypted value
 # For more info check: https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module
 new_root_password: password_hash 
