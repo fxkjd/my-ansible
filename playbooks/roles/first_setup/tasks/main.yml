@@ -36,6 +36,26 @@
   service:
     name: ssh
     state: restarted
-# TODO:
-# Modify iptables
-# Install iptables-persistent
+- name: First Setup | Install nftables
+  apt:
+    pkg: "{{ packages }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 600
+  vars:
+    packages:
+      - nftables
+- name: First Setup | Configure nftables
+  template:
+    src: nftables.conf.j2
+    dest: /etc/nftables.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart nftables
+- name: First Setup | Ensure all nftables services are started and enabled
+  service:
+    name: nftables 
+    state: started
+    enabled: yes
