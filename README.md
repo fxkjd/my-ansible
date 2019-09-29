@@ -12,7 +12,7 @@ Edit the inventory hosts (`hosts.ini`) to target your desired host. You may also
 
 ## First 20 seconds in a server
 
-Basic configuration for a fresh server. Modify the configuration variables in `First Setup`.
+Basic configuration for a fresh server. Modify the configuration variables in `First Setup` section.
 
 Run the `first_setup` playbook
 
