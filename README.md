@@ -19,3 +19,9 @@ Run the `first_setup` playbook
     $ ansible-playbook --ask-pass -i inventories/my_projects/hosts.ini playbooks/first_setup.yml
 
 This should be the only time that you have to use a password for a server.
+
+## Other playbooks 
+
+Logwatch - Is going to install and config logwatch 
+
+    $ ansible-playbook -i inventories/my_projects/hosts.ini playbooks/logwatch.yml

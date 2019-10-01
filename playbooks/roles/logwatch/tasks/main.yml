@@ -1,0 +1,8 @@
+---
+- name: Logwatch | Update the package list
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+# By default logwatch installs exim4, this forces apt to install only logwatch + msmtp 
+- name: Logwatch | Install logwatch 
+  shell: apt -y install logwatch exim4-base- sendmail-base- procmail- qmail- postfix- opensmtpd- nullmailer- esmtp- dma- courier-authdaemon- citadel-server- 
