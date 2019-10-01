@@ -22,6 +22,6 @@ This should be the only time that you have to use a password for a server.
 
 ## Other playbooks 
 
-Logwatch - Is going to install and config logwatch 
+Logwatch - install and config logwatch 
 
     $ ansible-playbook -i inventories/my_projects/hosts.ini playbooks/logwatch.yml
