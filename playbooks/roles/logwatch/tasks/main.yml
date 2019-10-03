@@ -3,6 +3,50 @@
   apt:
     update_cache: yes
     cache_valid_time: 3600
+- name: Logwatch | Install Curl 
+  apt:
+    pkg: "{{ packages }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 600
+  vars:
+    packages:
+      - curl 
 # By default logwatch installs exim4, this forces apt to install only logwatch + msmtp 
 - name: Logwatch | Install logwatch 
   shell: apt -y install logwatch exim4-base- sendmail-base- procmail- qmail- postfix- opensmtpd- nullmailer- esmtp- dma- courier-authdaemon- citadel-server- 
+- name: Logwatch | Create folder structure
+  file: 
+    path: "{{ item }}"
+    owner: root
+    group: root
+    mode: 0755
+    recurse: yes
+    state: directory  
+  with_items:
+    - ["/root/logwatch_bot", "/root/logwatch_bot/logs", "/var/cache/logwatch"]
+- name: Logwatch | Download logwatch telegram bot
+  get_url:
+    url: https://raw.githubusercontent.com/fxkjd/logwatch-telegram-bot/master/logwatch.sh 
+    dest: /root/logwatch_bot/logwatch.sh
+    mode: "0700"
+  register: telegram_bot_download
+- name: Logwatch | Set telegram bot token 
+  lineinfile: 
+    dest: /root/logwatch_bot/logwatch.sh
+    regexp: "<YOUR BOT TOKEN>"
+    line: "token={{ telegram_bot_token }}"
+  when: telegram_bot_download.changed
+- name: Logwatch | Set chat ID 
+  lineinfile: 
+    dest: /root/logwatch_bot/logwatch.sh
+    regexp: "<YOUR CHAT ID>" 
+    line: "chat_id={{ telegram_chat_id }}" 
+  when: telegram_bot_download.changed
+- name: Logwatch | Creates a cronjob for logwatch telegram bot 
+  cron: 
+    name: "Logwatch.sh"
+    minute: "0"
+    hour: "8"
+    job: "/root/logwatch_bot/logwatch.sh"
+  when: telegram_bot_download.changed

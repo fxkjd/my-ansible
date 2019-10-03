@@ -13,3 +13,11 @@ new_root_password: password_hash
 new_user_password: password_hash
 
 # ---------------------------- First setup config variables ---------------------------- #
+
+
+# ----------------------------- Logwatch config variables ------------------------------ #
+
+telegram_bot_token: your_telegram_bot_token 
+telegram_chat_id: your_telegram_chat_id 
+
+# ----------------------------- Logwatch config variables ------------------------------ #
