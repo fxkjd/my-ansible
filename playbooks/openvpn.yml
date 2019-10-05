@@ -1,0 +1,6 @@
+- name: Install required software, configure and harden
+# ========================================================
+  hosts:
+    - "{{ cmd_hosts | default('servers') }}"
+  roles:
+    - openvpn

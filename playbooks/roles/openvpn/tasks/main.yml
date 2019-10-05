@@ -1,0 +1,5 @@
+---
+- import_tasks: roles/openvpn/tasks/package.yml
+- import_tasks: roles/openvpn/tasks/pki.yml
+- import_tasks: roles/openvpn/tasks/openvpn.yml
+- import_tasks: roles/openvpn/tasks/firewall.yml

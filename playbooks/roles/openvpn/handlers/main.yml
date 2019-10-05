@@ -1,0 +1,9 @@
+- name: start openvpn
+  service:
+    name: "openvpn@{{ item.proto }}-{{ item.port }}.service"
+    state: restarted 
+  with_items: "{{ openvpn_instances }}"
+- name: restart nftables
+  service:
+    name: nftables
+    state: restarted

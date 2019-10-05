@@ -1,0 +1,43 @@
+---
+- name: OpenVPN | Package | Ensure the APT cache is up to date
+  apt:
+    update_cache: yes
+  changed_when: False
+
+- name: OpenVPN | Package | Install specific debian packages
+  package:
+    name: "{{ item }}"
+  with_items: 
+    # Make sure https repos can be added (needed for OpenVPN repo)
+    - apt-transport-https
+    - ca-certificates
+    # Required for the apt_repository module
+    - software-properties-common 
+  register: install_specific_result
+  until: install_specific_result is success
+  retries: 5
+  delay: 5
+
+- name: OpenVPN | Package | Install required packages
+  package:
+    name: "{{ item }}"
+  with_items: 
+    - sudo
+    - python-pip
+    - python-virtualenv
+    - git
+    # Used for the sync_clients matching
+    - gawk
+    - openssl
+    - openvpn
+  register: install_required_result
+  until: install_required_result is success
+  retries: 5
+  delay: 5
+  tags:
+    - skip_ansible_lint
+
+- name: OpenVPN | Package | Install pexpect via pip
+  pip:
+    name: "pexpect"
+    version: "3.3"
