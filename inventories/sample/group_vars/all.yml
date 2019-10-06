@@ -35,7 +35,7 @@ openvpn_instances:
       port: 1194,
       mask: "10.9.0.0 255.255.255.0",
       cidr: "10.9.0.0/24",
-      server_extra_options: ['push "redirect-gateway def1"'],
+      server_extra_options: ['push "redirect-gateway def1"', 'push "dhcp-option DNS 9.9.9.9"', 'push "dhcp-option DNS 1.1.1.1"'],
       client_extra_options: [],
   }
   # Uncomment below to listen on TCP 443. This will look like normal SSL/TLS traffic
