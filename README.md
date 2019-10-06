@@ -22,17 +22,17 @@ This should be the only time that you have to use a password for a server.
 
 ## Other playbooks 
 
-Logwatch - install and config logwatch 
+### Logwatch - install and config logwatch 
 
     $ ansible-playbook -i inventories/my_projects/hosts.ini playbooks/logwatch.yml
 
-OpenVPN - install and config OpenVPN 
+### OpenVPN - install and config OpenVPN 
 
     $ ansible-playbook -i inventories/my_projects/hosts.ini playbooks/openvpn.yml
 
 Configure OpenVPN variables in the OpenVPN section of `group_vars/all.yml` file. 
 
-Add OpenVPN Clients - Create and download OpenVPN client files 
+### Add OpenVPN Clients - Create and download OpenVPN client files 
 
 This playbook needs a list named `clients_to_add`, check `group_vars/add_clients.yml` for an example.
 
