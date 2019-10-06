@@ -1,0 +1,12 @@
+---
+- name: OpenVPN | Add Clients | Set server common name variable
+  set_fact:
+    openvpn_server_common_name: "{{ openvpn_server_common_name }}"
+
+- name: OpenVPN | Add Clients | Add clients and generate keys
+  include: add_gen_key.yml
+  when: clients_to_add is defined
+
+- name: OpenVPN | Add Clients | Add via CSR
+  include: add_via_csr.yml
+  when: csr_path is defined
